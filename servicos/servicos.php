@@ -26,11 +26,13 @@ $stm->bindValue(5, $terms);
 
 $stm->execute();
 
-$servicosFull = $pdo->query('SELECT * FROM servicos');
+header("location: index.php");
 
-$servicos = $servicosFull->fetchAll(PDO::FETCH_ASSOC);
+#$servicosFull = $pdo->query('SELECT * FROM servicos');
 
-print_r($servicos);
+#$servicos = $servicosFull->fetchAll(PDO::FETCH_ASSOC);
+
+#print_r($servicos);
 
 
 ?>

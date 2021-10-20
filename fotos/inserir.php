@@ -11,28 +11,21 @@ move_uploaded_file($caminhoAtual, $caminhoSalvar);
 
 $name = $_POST['name'];
 $description = $_POST['description'];
-$price = $_POST['price'];
+$date = $_POST['date'];
 $terms = $_POST['terms'];
 
-$sql = 'INSERT INTO servicos (photo, name, description, price, terms) VALUES (?, ?, ?, ?, ?);';
+$sql = 'INSERT INTO fotos (photo, name, description, date, terms) VALUES (?, ?, ?, ?, ?);';
 
 $stm = $pdo->prepare($sql);
 
 $stm->bindValue(1, $nomePhoto);
 $stm->bindValue(2, $name);
 $stm->bindValue(3, $description);
-$stm->bindValue(4, $price);
+$stm->bindValue(4, $date);
 $stm->bindValue(5, $terms);
 
 $stm->execute();
 
 header("location: index.php");
-
-#$servicosFull = $pdo->query('SELECT * FROM servicos');
-
-#$servicos = $servicosFull->fetchAll(PDO::FETCH_ASSOC);
-
-#print_r($servicos);
-
 
 ?>

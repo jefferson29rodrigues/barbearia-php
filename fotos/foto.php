@@ -1,27 +1,17 @@
 <?php
 require('../conexao.php');
 
-$user = $_POST['user'];
-$senha = sha1($_POST['password']);
+$id = $_GET['id'];
 
-$sql = 'SELECT * FROM conta WHERE user = ? AND password = ?;';
+$sql = 'SELECT * FROM fotos WHERE id = ?;';
 
 $stm = $pdo->prepare($sql);
 
-$stm->bindValue(1, $user);
-$stm->bindValue(2, $senha);
+$stm->bindValue(1, $id);
 
 $stm->execute();
 
-$usuario = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-if (count($usuario) <= 0) {
-    echo "Usuário ou senha estão incorretos ";
-    echo "<a href='../login'>Tente novamente.</a>";
-} else {
-    print_r($usuario);
-}
-
+$foto = $stm->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -107,3 +97,23 @@ if (count($usuario) <= 0) {
 			</div>
 
     	</nav>
+
+    <br><br><br><br>
+
+    <br>
+		<div>
+
+        <!--CLIENTE_1  -->
+			<div class="row">
+          	
+                <center><div class="col-lg-4">
+		            <img class="rounded-circle"class="img-responsive" src="../images/<?php echo $foto[0]['photo'] ?>" alt="Generic placeholder image" width="340" height="340">
+		            <h2><?php echo $foto[0]['name'] ?></h2>
+		            <p><?php echo $foto[0]['description'] ?></p>
+		            <p><?php echo $foto[0]['date'] ?></p>
+          		</div></center>
+        
+            </div>
+
+	</body>
+</html>

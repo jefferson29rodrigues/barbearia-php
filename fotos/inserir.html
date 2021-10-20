@@ -1,30 +1,3 @@
-<?php
-require('../conexao.php');
-
-$user = $_POST['user'];
-$senha = sha1($_POST['password']);
-
-$sql = 'SELECT * FROM conta WHERE user = ? AND password = ?;';
-
-$stm = $pdo->prepare($sql);
-
-$stm->bindValue(1, $user);
-$stm->bindValue(2, $senha);
-
-$stm->execute();
-
-$usuario = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-if (count($usuario) <= 0) {
-    echo "Usuário ou senha estão incorretos ";
-    echo "<a href='../login'>Tente novamente.</a>";
-} else {
-    print_r($usuario);
-}
-
-
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -107,3 +80,77 @@ if (count($usuario) <= 0) {
 			</div>
 
     	</nav>
+
+    <br><br><br><br>
+
+    <!-- ==>Imagem da Empresa+ Layout
+
+    ==>Cadastro cliente:
+
+    ==>input com:nome,telefone,instagram,dataNascimento
+    ==> rodapé com criadores facebook e instagram -->
+
+
+
+    <form action="inserir.php" method="POST" enctype="multipart/form-data" class="row row-cols-lg-auto g-3 align-items-center">
+
+      <!-- INSERIR FOTO -->
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupFile01">Foto</label>
+        <input name="photo" type="file" class="form-control" id="inputGroupFile01">
+      </div><br>
+
+      <!-- INSERIR NOME DA FOTO -->
+      <div class="input-group">
+        <span class="input-group-text">Nome Da Foto</span>
+        <input name="name" type="text" aria-label="First name" class="form-control">
+      </div><br>
+
+      <!-- INSERIR DESCRIÇÂO DO SERVIÇO -->
+      <div class="input-group">
+        <span class="input-group-text">Descrição</span>
+        <input name="description" type="text" aria-label="First name" class="form-control">
+      </div><br>
+
+      <!-- INSERIR VALOR DO SERVIÇO-->
+
+      <div class="col-12">      
+        
+        <div class="input-group">
+          <span class="input-group-text">Data:</span>
+          <input name="date" type="date" aria-label="First name" class="form-control">
+        </div><br>
+
+      </div><br>
+
+      
+      <div class="col-12">
+
+        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+
+      </div><br>
+
+      <!-- BOTÂO ACEITAR OS TERMOS -->
+      <div class="col-12">
+        
+        <div class="form-check">
+          <input name="terms" value="accepted" class="form-check-input" type="checkbox" id="inlineFormCheck">
+          <label class="form-check-label" for="inlineFormCheck">
+            Aceito os Termos
+          </label>
+        </div>
+
+      </div><br>
+
+      <!-- BOTÂO CADASTRAR -->
+       <div class="btn">
+            <a href=""><span><button type="submit">Inserir Foto</button></span></a>
+        </div>
+    </form>
+
+    <footer>
+      <img class="rounded-circle" src="../images/logo.jpeg" alt="Generic placeholder image" width="80" height="80">
+    </footer>
+
+  </body>
+</html>

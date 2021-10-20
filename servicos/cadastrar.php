@@ -1,26 +1,38 @@
 <?php
 require('../conexao.php');
 
-$user = $_POST['user'];
-$senha = sha1($_POST['password']);
+$photo = $_FILES['photo'];
 
-$sql = 'SELECT * FROM conta WHERE user = ? AND password = ?;';
+$nomePhoto = $_FILES['photo']['name'];
+$caminhoAtual = $_FILES['photo']['tmp_name'];
+$caminhoSalvar = '../images/'.$nomePhoto;
+
+move_uploaded_file($caminhoAtual, $caminhoSalvar);
+
+$name = $_POST['name'];
+$description = $_POST['description'];
+$price = $_POST['price'];
+$terms = $_POST['terms'];
+
+$sql = 'INSERT INTO servicos (photo, name, description, price, terms) VALUES (?, ?, ?, ?, ?);';
 
 $stm = $pdo->prepare($sql);
 
-$stm->bindValue(1, $user);
-$stm->bindValue(2, $senha);
+$stm->bindValue(1, $nomePhoto);
+$stm->bindValue(2, $name);
+$stm->bindValue(3, $description);
+$stm->bindValue(4, $price);
+$stm->bindValue(5, $terms);
 
 $stm->execute();
 
-$usuario = $stm->fetchAll(PDO::FETCH_ASSOC);
+header("location: index.php");
 
-if (count($usuario) <= 0) {
-    echo "Usuário ou senha estão incorretos ";
-    echo "<a href='../login'>Tente novamente.</a>";
-} else {
-    print_r($usuario);
-}
+#$servicosFull = $pdo->query('SELECT * FROM servicos');
+
+#$servicos = $servicosFull->fetchAll(PDO::FETCH_ASSOC);
+
+#print_r($servicos);
 
 
 ?>

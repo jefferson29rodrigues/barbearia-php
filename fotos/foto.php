@@ -107,7 +107,7 @@ $foto = $stm->fetchAll(PDO::FETCH_ASSOC);
 			<div class="row">
           	
                 <center><div class="col-lg-4">
-		            <img class="rounded-circle"class="img-responsive" src="../images/<?php echo $foto[0]['photo'] ?>" alt="Generic placeholder image" width="340" height="340">
+		            <img class="img-responsive" src="../images/<?php echo $foto[0]['photo'] ?>" alt="Generic placeholder image" width="340" height="340">
 		            <h2><?php echo $foto[0]['name'] ?></h2>
 		            <p><?php echo $foto[0]['description'] ?></p>
 		            <p><?php echo $foto[0]['date'] ?></p>

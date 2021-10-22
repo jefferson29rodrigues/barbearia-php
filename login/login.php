@@ -15,13 +15,6 @@ $stm->execute();
 
 $usuario = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-if (count($usuario) <= 0) {
-    echo "Usuário ou senha estão incorretos ";
-    echo "<a href='../login'>Tente novamente.</a>";
-} else {
-    print_r($usuario);
-}
-
 
 ?>
 
@@ -107,3 +100,20 @@ if (count($usuario) <= 0) {
 			</div>
 
     	</nav>
+
+		<br><br><br><br><br>
+
+		<?php
+		
+		if (count($usuario) <= 0) {
+			echo "Usuário ou senha estão incorretos ";
+			echo "<a href='../login'>Tente novamente.</a>";
+		} else {
+			echo "Usuário ".$usuario[0]['user']." Seja Bem vindo!<br><br>";
+			echo "Sua senha é: ".$usuario[0]['password'];
+		}
+		
+		
+		?>
+	
+</body>
